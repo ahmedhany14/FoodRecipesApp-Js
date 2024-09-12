@@ -26,9 +26,9 @@ This is a user-friendly application that allows users to explore, search, and sa
 
 * 1) Clone the repository
 
-    git clone https://github.com/ahmedhany14/FoodRecipesApp-Js.git
-    cd "FoodRecipesApp-Js"
+        git clone https://github.com/ahmedhany14/FoodRecipesApp-Js.git
+        cd "FoodRecipesApp-Js"
 
 * 2) packages installation
 
-    npm i
+        npm i
