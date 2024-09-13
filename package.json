@@ -1,0 +1,22 @@
+{
+  "name": "recipies_app",
+  "version": "1.0.0",
+  "description": "Recipies App",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmedhany14/FoodRecipesApp-Js.git"
+  },
+  "author": "Ahmed Hany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmedhany14/FoodRecipesApp-Js/issues"
+  },
+  "homepage": "https://github.com/ahmedhany14/FoodRecipesApp-Js#readme",
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.1"
+  }
+}

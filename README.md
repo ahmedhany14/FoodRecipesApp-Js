@@ -11,7 +11,7 @@
 - [Description](#description)
 - [Features](#features)
 - [Installation](#installation)
-
+- [Running](#running)
 ## Description
 
 This is a user-friendly application that allows users to explore, search, and save their favorite food recipes from a wide variety of cuisines.
@@ -20,7 +20,7 @@ This is a user-friendly application that allows users to explore, search, and sa
 
 * **Search Recipes:** Find your favorite recipes by name, ingredients, or cuisine
 * **Bookmark recipes:** Save your favorite recipes for quick access
-* **Create your own recipes:** User can upload own recipes, it will automatically bookmarked
+* **Create your own recipes:** User can upload own recipes, it will automatically be bookmarked
 
 ## Installation
 
@@ -32,3 +32,7 @@ This is a user-friendly application that allows users to explore, search, and sa
 **packages installation**
 
         npm i
+
+## Running
+
+        npm start

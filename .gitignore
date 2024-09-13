@@ -21,3 +21,6 @@ rad.json
 #Test results file
 TestResults.xml
 Planning
+node_modules/
+dist/
+.parcel-cache/
