@@ -177,5 +177,6 @@ const LoadRecipe = async function () {
   }
 };
 
-window.addEventListener('hashchange', LoadRecipe);
-window.addEventListener('load', LoadRecipe);
+['hashchange', 'load'].forEach(event =>
+  window.addEventListener(event, LoadRecipe)
+);
