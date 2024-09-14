@@ -1,6 +1,9 @@
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+
+import * as model from './model';
+
 const recipeContainer = document.querySelector('.recipe');
 
 console.log('Here we goo');
@@ -28,8 +31,8 @@ const Spinner = function (parentElement) {
 const LoadRecipe = async function () {
   try {
     // Get the hash from the URL
-    const hash_id = window.location.hash.slice(1);
-    //const hash_id = '664c8f193e7aa067e94e8783';
+    //const hash_id = window.location.hash.slice(1);
+    const hash_id = '664c8f193e7aa067e94e8783';
 
     // If there is no hash in the URL, return
     if (hash_id.length === 0 || hash_id === null) return;
@@ -37,38 +40,10 @@ const LoadRecipe = async function () {
     Spinner(recipeContainer);
 
     // 1) Fetching data from API
-    const response = await fetch(
-      //      'https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e8783'
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${hash_id}`
-    );
-
-    // Check if the response is ok, if not throw an error
-    if (response.status !== 200) {
-      throw new Error(
-        `Couldn't fetch the recipe data, API status: ${response.status}`
-      );
-    }
-
-    // Convert the response to JSON to get the recipe data
-    const data = await response.json();
-    if (data.status !== 'success') {
-      throw new Error(`No data found, ${data.message}`);
-    }
-
-    // Destructure the data object to get the recipe data
-    let { recipe } = data.data;
-    recipe = {
-      title: recipe.title,
-      id: recipe.id,
-      publisher: recipe.publisher,
-      img_url: recipe.image_url,
-      source_url: recipe.source_url,
-      servings: recipe.servings,
-      cooking_time: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
-
+    await model.LoadRecipe(hash_id);
     // 2) Rendering the recipe
+
+    const recipe = model.state.recipe;
 
     const markup = `
         <figure class="recipe__fig">
