@@ -27,13 +27,19 @@ const Spinner = function (parentElement) {
 
 const LoadRecipe = async function () {
   try {
+    // Get the hash from the URL
+    const hash_id = window.location.hash.slice(1);
+    //const hash_id = '664c8f193e7aa067e94e8783';
+
+    // If there is no hash in the URL, return
+    if (hash_id.length === 0 || hash_id === null) return;
     // Render spinner
     Spinner(recipeContainer);
 
     // 1) Fetching data from API
     const response = await fetch(
       //      'https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e8783'
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${hash_id}`
     );
 
     // Check if the response is ok, if not throw an error
@@ -171,4 +177,5 @@ const LoadRecipe = async function () {
   }
 };
 
-LoadRecipe();
+window.addEventListener('hashchange', LoadRecipe);
+window.addEventListener('load', LoadRecipe);
