@@ -1,28 +1,17 @@
 import { async } from 'regenerator-runtime';
+import { API_URL } from './config.js';
+import { get_data,wait } from './helper.js';
 
 export const state = {
   recipe: {},
 };
 
+
 export const LoadRecipe = async function (hash_id) {
   try {
-    const response = await fetch(
-      //      'https://forkify-api.herokuapp.com/api/v2/recipes/664c8f193e7aa067e94e8783'
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${hash_id}`
-    );
+    const data = await Promise.race([get_data(`${API_URL}${hash_id}`), wait(.5)]);
 
-    // Check if the response is ok, if not throw an error
-    if (response.status !== 200) {
-      throw new Error(
-        `Couldn't fetch the recipe data, API status: ${response.status}`
-      );
-    }
-
-    // Convert the response to JSON to get the recipe data
-    const data = await response.json();
-    if (data.status !== 'success') {
-      throw new Error(`No data found, ${data.message}`);
-    }
+    if (!data) throw new Error('Request took too long');
 
     // Destructure the data object to get the recipe data
     let { recipe } = data.data;

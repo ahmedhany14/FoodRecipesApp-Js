@@ -6,7 +6,6 @@ import * as model from './model';
 
 const recipeContainer = document.querySelector('.recipe');
 
-console.log('Here we goo');
 
 // 1) Load recipe data
 /*
@@ -25,17 +24,18 @@ const controlRecipes = async function () {
     if (hash_id.length === 0 || hash_id === null) return;
     // Render spinner
     RecipeView.renderSpinner();
-    console.log('hello');
 
     // 1) Fetching data from API
     await model.LoadRecipe(hash_id);
     // 2) Rendering the recipe
-    if (model.state.recipe.length === 0) return;
-    console.log(model.state.recipe);
+
+    if (!model.state.recipe) {
+      throw new Error('No recipe found');
+    }
     RecipeView.render(model.state.recipe);
   } catch (err) {
     // Catch the error and log it
-    alert(err.message);
+    //alert(err.message);
     console.error(err.message);
   }
 };
