@@ -3,26 +3,17 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import RecipeView from './views/recipeView.js';
 import SearchView from './views/searchView.js';
-
+import searchResult from './views/searchResultView.js';
 import * as model from './model';
-
-const recipeContainer = document.querySelector('.recipe');
-
-
-// 1) Load recipe data
-/*
-API link :https://forkify-api.herokuapp.com/v2
-Link of Get recipe/Delete recipe: https://forkify-api.herokuapp.com/api/v2/recipes/ID
-
-*/
 
 const controlRecipes = async function (hash_id = '') {
   try {
-    // Get the hash from the URL
-    //const hash_id = window.location.hash.slice(1);
     //hash_id = '664c8f193e7aa067e94e8783';
-    // If there is no hash in the URL, return
+
+    hash_id = window.location.hash.slice(1);
+
     if (hash_id.length === 0 || typeof hash_id !== "string") return;
+
     // Render spinner
     RecipeView.renderSpinner();
 
@@ -44,7 +35,6 @@ const controlRecipes = async function (hash_id = '') {
 
 const controlSearchResults = async function (query = '') {
   try {
-
     // Get the query from the search view
     query = SearchView.getQuery();
 
@@ -52,10 +42,10 @@ const controlSearchResults = async function (query = '') {
 
 
     if (query.length === 0 || typeof query !== "string") return;
+    searchResult.renderSpinner();
 
     // 2) Load search results
     await model.LoadSearchResult(query);
-    console.log(model.state.search.result);
 
     // Check if there are any search results
     if (!model.state.search.result) {
@@ -63,7 +53,7 @@ const controlSearchResults = async function (query = '') {
     }
 
     // 3) Render search results
-    controlRecipes(model.state.search.result[20].id);
+    searchResult.render(model.state.search.result);
   } catch (err) {
     console.error(err.message);
   }
