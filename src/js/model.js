@@ -21,7 +21,7 @@ export const LoadRecipe = async function (hash_id) {
     if (!data) throw new Error('Request took too long');
 
     // Destructure the data object to get the recipe data
-    let { recipe } = data.data;
+    let { recipe } = await data.data;
     state.recipe = {
       title: recipe.title,
       id: recipe.id,
@@ -68,4 +68,13 @@ export const getsearchResultPage = function (page = 1) {
 
   const result = state.search.result.slice(left, right);
   return result;
+}
+
+export const updateServings = function (updateServings) {
+  console.log(updateServings);
+
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = ing.quantity * updateServings / state.recipe.servings;
+  });
+  state.recipe.servings = updateServings;
 }

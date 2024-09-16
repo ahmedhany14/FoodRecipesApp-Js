@@ -37,6 +37,17 @@ export default class View {
         );
     }
 
+    addHandlerUpdateServings(subscriber) {
+
+        this._parentElement.addEventListener('click', function (e) {
+            const btn = e.target.closest('.btn--update-servings');
+            if (!btn) return;
+
+            const updateTo = +btn.dataset.updateTo;
+            subscriber(Math.max(2, updateTo));
+        });
+    }
+
     rendersuccessMessage(message = this._successMessage) {
         const markup = `
         <div class="message">

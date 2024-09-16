@@ -10,7 +10,7 @@ import * as model from './model';
 
 const controlRecipes = async function (hash_id = '') {
   try {
-    //hash_id = '664c8f193e7aa067e94e8783';
+    //hash_id = '664c8f193e7aa067e94e838d';
 
     hash_id = window.location.hash.slice(1);
 
@@ -33,6 +33,7 @@ const controlRecipes = async function (hash_id = '') {
     RecipeView.renderError();
     //console.error(err.message);
   }
+
 };
 
 const controlSearchResults = async function (query = '') {
@@ -72,12 +73,17 @@ const controlPagination = function (page) {
   PaginationView.render(model.state.search);
 }
 
+const controlServings = function (servingsNumber) {
+  model.updateServings(servingsNumber);
+  console.log(model.state.recipe);
+  RecipeView.render(model.state.recipe);
+}
+
 const main = function () {
   RecipeView.addHandlerRender(controlRecipes);
+  RecipeView.addHandlerUpdateServings(controlServings);
   SearchView.addHandlerSearch(controlSearchResults);
   PaginationView.addHandlerClick(controlPagination);
-
-  controlSearchResults();
 };
 
 main();
