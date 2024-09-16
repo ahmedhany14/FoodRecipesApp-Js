@@ -10,7 +10,7 @@ export default class View {
             return this.renderError();
 
         this._data = data;
-        console.log(this._data);
+
         // Generate the recipe markup
         const markup = this._generateMarkup();
 

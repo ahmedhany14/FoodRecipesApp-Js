@@ -1,5 +1,5 @@
 import { async } from 'regenerator-runtime';
-import { API_URL } from './config.js';
+import { API_URL, RES_PER_PAGE } from './config.js';
 import { get_data, wait } from './helper.js';
 
 export const state = {
@@ -7,14 +7,16 @@ export const state = {
 
   search: {
     query: '',
-    result: []
+    result: [],
+    resultPerPage: RES_PER_PAGE,
+    page: 1,
   }
 };
 
 
 export const LoadRecipe = async function (hash_id) {
   try {
-    const data = await Promise.race([get_data(`${API_URL}${hash_id}`), wait(.5)]);
+    const data = await Promise.race([get_data(`${API_URL}${hash_id}`), wait(1.5)]);
 
     if (!data) throw new Error('Request took too long');
 
@@ -56,3 +58,14 @@ export const LoadSearchResult = async function (query) {
     throw err;
   }
 };
+
+
+export const getsearchResultPage = function (page = 1) {
+  // page 1: 0-9, page 2: 10-19, page 3: 20-29
+  state.search.page = page;
+  const left = (page - 1) * state.search.resultPerPage;
+  const right = Math.min(page * state.search.resultPerPage, state.search.result.length);
+
+  const result = state.search.result.slice(left, right);
+  return result;
+}
