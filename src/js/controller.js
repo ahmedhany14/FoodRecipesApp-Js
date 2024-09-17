@@ -56,7 +56,7 @@ const controlSearchResults = async function (query = '') {
     }
 
     // 3) Render search results
-    const PageNumber = 2;
+    const PageNumber = 1;
     const pages = model.getsearchResultPage(PageNumber);
 
     searchResult.render(pages);
@@ -79,9 +79,19 @@ const controlServings = function (servingsNumber) {
   RecipeView.render(model.state.recipe);
 }
 
+const controlBookmark = function () {
+  console.log('Bookmark');
+
+  model.Bookmark(model.state.recipe);
+
+  RecipeView.render(model.state.recipe);
+}
+
 const main = function () {
+
   RecipeView.addHandlerRender(controlRecipes);
   RecipeView.addHandlerUpdateServings(controlServings);
+  RecipeView.addHandlerBookmark(controlBookmark);
   SearchView.addHandlerSearch(controlSearchResults);
   PaginationView.addHandlerClick(controlPagination);
 };
