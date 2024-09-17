@@ -8,28 +8,22 @@ class BookmarkView extends View {
     _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark!';
     _successMessage = '';
     _generateMarkup() {
-        const Bookmark = [];
-        this._data.Bookmarks.forEach(bookmark => {
-            Bookmark.push(bookmark);
-        });
-        console.log(Bookmark);
+
         console.log(this._data);
-        const result = Bookmark.map((i, id) => {
-            return this._generateMarkupPreview();
-        });
-        return result.join('');
+
+        return this._data.map(this._generateMarkupPreview).join('');
     }
 
-    _generateMarkupPreview() {
+    _generateMarkupPreview(recipe) {
         return `
             <li class="preview">
-                <a class="preview__link" href="#${this._data.recipe.id}">
+                <a class="preview__link" href="#${recipe.id}">
                     <figure class="preview__fig">
-                        <img src="${this._data.recipe.img_url}" alt="${this._data.recipe.title}" />
+                        <img src="${recipe.img_url}" alt="${recipe.title}" />
                     </figure>
                     <div class="preview__data">
-                        <h4 class="preview__title">${this._data.recipe.title} Cream ...</h4>
-                        <p class="preview__publisher">${this._data.recipe.publisher}</p>
+                        <h4 class="preview__title">${recipe.title} Cream ...</h4>
+                        <p class="preview__publisher">${recipe.publisher}</p>
                     </div>
                 </a>
             </li>`;

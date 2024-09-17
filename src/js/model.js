@@ -12,6 +12,7 @@ export const state = {
     page: 0,
   },
   Bookmarks: new Set(),
+  bookmark_recipes: [],
 };
 
 
@@ -87,9 +88,11 @@ export const Bookmark = function (recipe) {
 
   if (state.Bookmarks.has(recipe_id)) {
     state.Bookmarks.delete(recipe_id);
+    state.bookmark_recipes = state.bookmark_recipes.filter(rec => rec.id !== recipe_id);
     state.recipe.bookmark = false;
   } else {
     state.Bookmarks.add(recipe_id);
+    state.bookmark_recipes.push(recipe);
     state.recipe.bookmark = true;
   }
 

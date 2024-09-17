@@ -87,7 +87,7 @@ const controlBookmark = function () {
 
   RecipeView.render(model.state.recipe);
 
-  BookmarkView.render(model.state);
+  BookmarkView.render(model.state.bookmark_recipes);
 }
 
 const main = function () {
