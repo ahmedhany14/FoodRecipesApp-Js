@@ -24,3 +24,4 @@ Planning
 node_modules/
 dist/
 .parcel-cache/
+test.js

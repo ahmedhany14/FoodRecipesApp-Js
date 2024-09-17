@@ -5,6 +5,7 @@ import RecipeView from './views/recipeView.js';
 import SearchView from './views/searchView.js';
 import searchResult from './views/searchResultView.js';
 import PaginationView from './views/PaginationView.js';
+import BookmarkView from './views/bookmakrView.js';
 
 import * as model from './model';
 
@@ -85,6 +86,8 @@ const controlBookmark = function () {
   model.Bookmark(model.state.recipe);
 
   RecipeView.render(model.state.recipe);
+
+  BookmarkView.render(model.state);
 }
 
 const main = function () {
