@@ -33,6 +33,7 @@ export const LoadRecipe = async function (hash_id) {
       servings: recipe.servings,
       cooking_time: recipe.cooking_time,
       ingredients: recipe.ingredients,
+      bookmark: state.Bookmarks.has(hash_id) ? true : false
     };
     state.recipe.bookmark = state.Bookmarks.has(hash_id) ? true : false;
     state.search.page = 1;
@@ -83,6 +84,21 @@ export const updateServings = function (updateServings) {
   state.recipe.servings = updateServings;
 }
 
+export const storeBookmarks = function () {
+  localStorage.setItem('Bookmarks', JSON.stringify(Array.from(state.bookmark_recipes)));
+}
+
+export const loadBookmarks = function () {
+  const bookmarkStorage = localStorage.getItem('Bookmarks');
+  if (bookmarkStorage) {
+    state.bookmark_recipes = JSON.parse(bookmarkStorage);
+    state.bookmark_recipes.forEach(bookmark => {
+      state.recipe = bookmark;
+      state.Bookmarks.add(bookmark.id);
+    });
+  }
+}
+
 export const Bookmark = function (recipe) {
   const recipe_id = recipe.id;
 
@@ -95,6 +111,6 @@ export const Bookmark = function (recipe) {
     state.bookmark_recipes.push(recipe);
     state.recipe.bookmark = true;
   }
-
+  storeBookmarks();
   console.log(state.Bookmarks);
 }

@@ -90,8 +90,15 @@ const controlBookmark = function () {
   BookmarkView.render(model.state.bookmark_recipes);
 }
 
-const main = function () {
 
+const loadBookmarks = function () {
+  model.loadBookmarks();
+  console.log(model.state.bookmark_recipes);
+  BookmarkView.render(model.state.bookmark_recipes);
+}
+
+const main = function () {
+  loadBookmarks()
   RecipeView.addHandlerRender(controlRecipes);
   RecipeView.addHandlerUpdateServings(controlServings);
   RecipeView.addHandlerBookmark(controlBookmark);
